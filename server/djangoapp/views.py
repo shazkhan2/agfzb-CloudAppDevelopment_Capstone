@@ -2,6 +2,16 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout
+from django.contrib.auth.forms import UserCreationForm
+
+
+
+
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 # from .models import related models
 # from .restapis import related methods
 from django.contrib.auth import login, logout, authenticate
@@ -36,14 +46,61 @@ def contact(request):
 # Create a `login_request` view to handle sign in request
 # def login_request(request):
 # ...
+def login_request(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
 
+        if user is not None:
+            login(request, user)
+            messages.success(request, 'Login successful.')
+            return redirect('index')
+        else:
+            messages.error(request, 'Invalid username or password.')
+
+    return render(request, 'djangoapp/login.html') 
 # Create a `logout_request` view to handle sign out request
 # def logout_request(request):
 # ...
+def logout_request(request):
+    logout(request)
+    messages.success(request, 'Logout successful.')
+    return redirect('index')
 
 # Create a `registration_request` view to handle sign up request
 # def registration_request(request):
 # ...
+def registration_request(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, 'Registration successful.')
+            return redirect('index')
+        else:
+            messages.error(request, 'Registration failed. Please check the form.')
+    else:
+        form = UserCreationForm()
+
+    return render(request, 'djangoapp/registration.html', {'form': form})
+
+# Create a `sign-up` view
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, 'Registration and login successful.')
+            return redirect('index')
+        else:
+            messages.error(request, 'Registration failed. Please check the form.')
+    else:
+        form = UserCreationForm()
+
+    return render(request, 'djangoapp/registration.html', {'form': form})
 
 # Update the `get_dealerships` view to render the index page with a list of dealerships
 def get_dealerships(request):

@@ -1,34 +1,36 @@
 from django.urls import path
-from .views import index, get_dealerships, about, contact
+from .views import index, get_dealerships, about, contact, login_request, logout_request, registration_request, signup
 
 from django.conf.urls.static import static
 from django.conf import settings
-from . import views
 
 app_name = 'djangoapp'
 urlpatterns = [
-
-    
-    # route is a string contains a URL pattern
-    # view refers to the view function
-    # name the URL
-
-    # path for about view
+    # Path for about view
     path('about/', about, name='about'),
 
-    # path for contact us view
+    # Path for contact us view
     path('contact/', contact, name='contact'),
 
-    # path for registration
+    # Path for registration
+path('registration/', registration_request, name='registration'),
 
-    # path for login
+    # Path for login
+path('login/', login_request, name='login'),
 
-    # path for logout
 
-    path(route='', view=views.get_dealerships, name='index'),
+    # Path for logout
+    path('logout/', logout_request, name='logout'),
 
-    # path for dealer reviews view
+    # Path for signup
+    path('signup/', signup, name='signup'),
 
-    # path for add a review view
+
+    # Path for the index view (get_dealerships)
+    path('', get_dealerships, name='index'),
+
+    # Path for dealer reviews view
+
+    # Path for add a review view
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
