@@ -15,15 +15,23 @@ logger = logging.getLogger(__name__)
 
 
 # Create your views here.
+# djangoapp/views.py
+from django.shortcuts import render
+
+def index(request):
+    return render(request, 'index.html')
 
 
 # Create an `about` view to render a static about page
 # def about(request):
 # ...
-
+def about(request):
+    return render(request, 'djangoapp/about.html')
 
 # Create a `contact` view to return a static contact page
 #def contact(request):
+def contact(request):
+    return render(request, 'djangoapp/contact.html')
 
 # Create a `login_request` view to handle sign in request
 # def login_request(request):
@@ -51,4 +59,3 @@ def get_dealerships(request):
 # Create a `add_review` view to submit a review
 # def add_review(request, dealer_id):
 # ...
-
