@@ -5,31 +5,25 @@
     {% load static %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body>
-
-<div class="container mt-5">
-    <h2>Registration</h2>
-    <form method="post" action="{% url 'djangoapp:registration' %}">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="id_first_name">First Name:</label>
-            <input type="text" class="form-control" id="id_first_name" name="first_name" required>
+    <body>
+    <!--Add a registration form here -->
+    <form action="{% url 'djangoapp:registration' %}" method="post">
+        <div class="container"> <!--Style root div with .container class -->
+          {% csrf_token %}
+          <h1>Sign Up</h1>
+          <hr>
+          <div class="form-group"> <!--Style second div with .form-group class -->
+              <label for="username"><b>User Name</b></label>
+              <input type="text" class="form-control" placeholder="Enter User Name: " name="username" required> <!--Style input with .form-control class -->
+              <label for="firstname"><b>First Name</b></label>
+              <input type="text" class="form-control" placeholder="Enter First Name: " name="firstname" required> <!--Style input with .form-control class -->
+              <label for="lastname"><b>Last Name</b></label>
+              <input type="text" class="form-control" placeholder="Enter Last Name: " name="lastname" required> <!--Style input with .form-control class -->
+              <label for="psw"><b>Password</b></label>
+              <input type="password" class="form-control" placeholder="Enter Password: " name="psw" required> <!--Style input with .form-control class -->
+              <button class="btn btn-primary" type="submit">Sign up</button> <!--Style button with .btn and .btn-primary class -->
+          </div>
         </div>
-        <div class="form-group">
-            <label for="id_last_name">Last Name:</label>
-            <input type="text" class="form-control" id="id_last_name" name="last_name" required>
-        </div>
-        <div class="form-group">
-            <label for="id_username">Username:</label>
-            <input type="text" class="form-control" id="id_username" name="username" required>
-        </div>
-        <div class="form-group">
-            <label for="id_password">Password:</label>
-            <input type="password" class="form-control" id="id_password" name="password" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Sign Up</button>
-    </form>
-</div>
-
-</body>
+      </form>
+    </body>
 </html>

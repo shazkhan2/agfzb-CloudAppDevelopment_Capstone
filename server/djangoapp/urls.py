@@ -1,36 +1,33 @@
 from django.urls import path
-from .views import index, get_dealerships, about, contact, login_request, logout_request, registration_request, signup
-from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
+from . import views
 
 app_name = 'djangoapp'
-
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # route is a string contains a URL pattern
+    # view refers to the view function
+    # name the URL
 
-    # Path for about view
-    path('about/', about, name='about'),
+    # path for about view
+    path(route='about/', view=views.about, name='about'),
+    
+    # path for contact us view
+    path(route='contact/', view=views.contact, name='contact'),
+    
+    # path for registration
+    path(route='registration/', view=views.registration_request, name='registration'),
+    # path for login
+     path(route='login/', view=views.login_request, name='login'),
+    
+    # path for logout
+    path(route='logout/', view=views.logout_request, name='logout'),
 
-    # Path for contact us view
-    path('contact/', contact, name='contact'),
+    path(route='', view=views.get_dealerships, name='index'),
 
-    # Path for registration
-    path('registration/', registration_request, name='registration'),
-
-    # Path for login
-    path('login/', login_request, name='login'),
-
-    # Path for logout
-    path('logout/', logout_request, name='logout'),
-
-    # Path for signup
-    path('signup/', signup, name='signup'),
-
-    # Path for the index view (get_dealerships)
-    path('', get_dealerships, name='index'),
-
-    # Path for dealer reviews view
-
-    # Path for add a review view
+    # path for dealer reviews view
+    path(route='dealer/<int:dealer_id>/', view=views.get_dealer_details, name='dealer_details'),
+    
+    # path for add a review view
+    path(route='add_dealer_review/<int:dealer_id>/', view=views.add_review, name='add_review')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

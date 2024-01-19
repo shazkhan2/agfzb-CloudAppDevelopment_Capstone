@@ -1,10 +1,27 @@
-<!-- djangoapp/templates/djangoapp/contact.html -->
-{% extends 'base.html' %}
-
-{% block title %}Contact Us{% endblock %}
-
-{% block content %}
-    <h2>Contact Us</h2>
-    <p>Address: Fantasy street</p>
-    <p>Telephone Number: 2020420420</p>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <head>
+    <h1 class="px-3">Contact Us</h1>
+    <div class="px-3">
+    <div class="mb-3 row">
+        <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+              <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="info@bestcardealership.com">
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="staticAddress" class="col-sm-2 col-form-label">Address</label>
+        <div class="col-sm-10">
+              <input type="text" readonly class="form-control-plaintext" id="staticAddress" value="990 North State Road 434,Brandon, FL">
+        </div>
+    </div> 
+    <div class="mb-3 row">
+        <label for="staticTelephone" class="col-sm-2 col-form-label">Telephone</label>
+        <div class="col-sm-10">
+              <input type="text" readonly class="form-control-plaintext" id="staticTelephone" value="(407) 862-1050">
+        </div>
+    </div> 
+</div>
+</html>
